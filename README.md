@@ -1,2 +1,2 @@
 # Fukizi.Pfm
-# just a small personal project
+### just a small personal accounting project ###
