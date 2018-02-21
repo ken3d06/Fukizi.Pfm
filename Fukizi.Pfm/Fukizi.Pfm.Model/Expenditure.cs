@@ -29,7 +29,7 @@ namespace Fukizi.Pfm.Model
       public new decimal Amount { get; set; }
       public new DateTime Date { get; set; }
       public new int CategoryId { get; set; }
-      public new ExpenditureCategory Category { get; }
+      public new ExpenditureCategory Category { get; set; }
       public new int PayMethodId { get; set; }
       public new PayMethod PayMethod { get; set; }
       public new string Description { get; set; }
