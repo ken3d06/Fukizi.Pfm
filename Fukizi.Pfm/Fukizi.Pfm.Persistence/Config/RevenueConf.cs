@@ -12,7 +12,9 @@ namespace Fukizi.Pfm.Persistence.Config
        public void Configure(EntityTypeBuilder<Revenue> builder)
        {
           builder.HasKey(r => r.Id);
-          builder.Property(e => e.Amount).HasColumnName("Amount");
+
+          builder.Property(r => r.Id).HasColumnName("Id");
+          builder.Property(r => r.Amount).HasColumnName("Amount");
           builder.Property(r => r.CategoryId).HasColumnName("CategoryId");
           builder.Property(r => r.PayMethodId).HasColumnName("PayMethodId");
           builder.Property(r => r.Date).HasColumnName("Date");
