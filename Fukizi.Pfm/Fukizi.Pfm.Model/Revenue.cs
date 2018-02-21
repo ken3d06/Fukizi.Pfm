@@ -24,14 +24,14 @@ namespace Fukizi.Pfm.Model
          Date = date;
          PayMethodId = payMethodId;
       }
-      public new int Id { get; }
-      public new decimal Amount { get; }
-      public new DateTime Date { get; }
+      public new int Id { get; set; }
+      public new decimal Amount { get; set; }
+      public new DateTime Date { get; set; }
       public new int CategoryId { get; set; }
-      public new RevenueCategory Category { get; }
+      public new RevenueCategory Category { get; set; }
       public new int PayMethodId { get; set; }
-      public new PayMethod PayMethod { get; }
-      public new string Description { get; }
+      public new PayMethod PayMethod { get; set; }
+      public new string Description { get; set; }
 
       public override bool Equals(object objRevenue)
       {
