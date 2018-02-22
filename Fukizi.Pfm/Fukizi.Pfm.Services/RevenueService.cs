@@ -83,6 +83,12 @@ namespace Fukizi.Pfm.Services
             .Where(revenue => revenue.Category.Name.Equals(givenCategory, StringComparison.OrdinalIgnoreCase))
             .Sum(revenue => revenue.Amount);
       }
+      public Dictionary<string, decimal> GetRevenueTotalsForAllCategories(DateTime datetime)
+      {
+         return LoadMonthRevenues(datetime)
+            .GroupBy(i => i.Category.Name)
+            .ToDictionary(g => g.Key, g => g.Sum(i => i.Amount));
+      }
       #endregion
    }
 }
