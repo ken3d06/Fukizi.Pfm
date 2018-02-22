@@ -86,8 +86,8 @@ namespace Fukizi.Pfm.Services
       public Dictionary<string, decimal> GetRevenueTotalsForAllCategoriesForMonth(DateTime datetime)
       {
          return LoadMonthRevenues(datetime)
-            .GroupBy(i => i.Category.Name)
-            .ToDictionary(g => g.Key, g => g.Sum(i => i.Amount));
+            .GroupBy(r => r.Category.Name)
+            .ToDictionary(g => g.Key, g => g.Sum(r => r.Amount));
       }
       public decimal GetRevenueTotalsForMonthByPayMethod(DateTime datetime, string payMethod)
       {
