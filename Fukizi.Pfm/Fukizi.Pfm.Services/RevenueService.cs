@@ -76,6 +76,13 @@ namespace Fukizi.Pfm.Services
          return LoadMonthRevenues(datetime).Sum(r => r.Amount);
       }
 
+      public decimal GetTotalForCategoryForGivenMonth(DateTime datetime, string givenCategory)
+      {
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(givenCategory), "Category must have a value");
+         return LoadMonthRevenues(datetime)
+            .Where(revenue => revenue.Category.Name.Equals(givenCategory, StringComparison.OrdinalIgnoreCase))
+            .Sum(revenue => revenue.Amount);
+      }
       #endregion
    }
 }
