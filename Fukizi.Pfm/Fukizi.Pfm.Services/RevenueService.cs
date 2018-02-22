@@ -29,5 +29,20 @@ namespace Fukizi.Pfm.Services
        {
           throw new NotImplementedException();
        }
+
+       public Revenue LoadRevenue(int id)
+       {
+          return _revenueRepository.GeRevenue(id);
+       }
+
+       public IEnumerable<Revenue> LoadRevenues()
+       {
+          return _revenueRepository.GetRevenues();
+       }
+
+       public IEnumerable<Revenue> LoadMonthRevenues(DateTime datetime)
+       {
+          return _revenueRepository.GetRevenuesForMonthAndYear(datetime.Month, datetime.Year);
+       }
     }
 }
