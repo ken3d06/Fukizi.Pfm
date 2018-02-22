@@ -10,6 +10,10 @@ namespace Fukizi.Pfm.Model
        {
        }
 
+       public ExpenditureCategory()
+       {
+       }
+
        public int CompareTo(ExpenditureCategory other)
        {
           return string.CompareOrdinal(Name, other.Name);
