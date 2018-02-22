@@ -8,7 +8,7 @@ namespace Fukizi.Pfm.Common.Validations
 {
     public class ValidationContract
     {
-       public static void Requires<TException>(bool predicate, string message = "") where TException : Exception, new()
+       public static void Required<TException>(bool predicate, string message = "") where TException : Exception, new()
        {
           if (predicate) return;
           Debug.WriteLine(message);
