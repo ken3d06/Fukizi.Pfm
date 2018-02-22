@@ -1,35 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Fukizi.Pfm.Common.Validations;
 using Fukizi.Pfm.Model;
+using Fukizi.Pfm.Repository;
 
 namespace Fukizi.Pfm.Services
 {
-    public class RevenueCategoryService : ICategoryService<RevenueCategory>
-    {
-       public IEnumerable<Category> GetAllCategories()
-       {
-          throw new NotImplementedException();
-       }
+   public class RevenueCategoryService : ICategoryService<RevenueCategory>
+   {
+      private readonly RevenueCategoryRepository _repository;
 
-       public bool Exists(string name)
-       {
-          throw new NotImplementedException();
-       }
+      public RevenueCategoryService(RevenueCategoryRepository repository)
+      {
+         _repository = repository;
+      }
+      public IEnumerable<Category> GetAllCategories()
+      {
+         return _repository.GetRevenueCategories();
+      }
 
-       public RevenueCategory Create(string name, int id = 0)
-       {
-          throw new NotImplementedException();
-       }
+      public bool Exists(string name)
+      {
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(name));
+         return _repository.GetRevCatByName(name) != null;
+      }
+      public RevenueCategory Create(RevenueCategory revenueCategory)
+      {
+         ValidationContract.Required<ArgumentException>(revenueCategory != null);
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(revenueCategory?.Name));
+         ValidationContract.Required<ArgumentException>(revenueCategory != null && !Exists(revenueCategory.Name), $"Revenue category '{revenueCategory.Name}' is already defined");
 
-       public void Delete(string name)
-       {
-          throw new NotImplementedException();
-       }
+        
+         _repository.Create(revenueCategory);
 
-       public void Save(int id, string name)
-       {
-          throw new NotImplementedException();
-       }
-    }
+         return revenueCategory;
+      }
+      public RevenueCategory Create(string name, int id = 0)
+      {
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(name));
+         ValidationContract.Required<ArgumentException>(!Exists(name), $"Revenue category '{name}' is already defined");
+
+         var revenueCategory = new RevenueCategory(id, name);
+         _repository.Create(revenueCategory);
+
+         return revenueCategory;
+      }
+
+      public void Delete(string name)
+      {
+         throw new NotImplementedException();
+      }
+
+      public void Save(int id, string name)
+      {
+         throw new NotImplementedException();
+      }
+   }
 }
