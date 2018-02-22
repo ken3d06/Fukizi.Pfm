@@ -22,7 +22,7 @@ namespace Fukizi.Pfm.Repository
           return _fukiziPfmContext.Revenues.Include(r => r.Category).Include(r => r.PayMethod).ToList();
        }
 
-       public Revenue GeRevenue(int id)
+       public Revenue GetRevenue(int id)
        {
           return _fukiziPfmContext.Revenues.Include(r => r.Category).Include(r => r.PayMethod)
              .FirstOrDefault(r => r.Id == id);
@@ -47,14 +47,14 @@ namespace Fukizi.Pfm.Repository
          
        }
 
-       private void CreateRevenue(Revenue revenue)
+       public void CreateRevenue(Revenue revenue)
        {
           CleanUpForEF(revenue);
           _fukiziPfmContext.Revenues.Add(revenue);
           _fukiziPfmContext.SaveChanges();
        }
 
-       private void UpdateRevenue(Revenue revenue)
+       public void UpdateRevenue(Revenue revenue)
        {
           CleanUpForEF(revenue);
           _fukiziPfmContext.Revenues.Attach(revenue);
