@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Fukizi.Pfm.Common.Validations;
 using Fukizi.Pfm.Model;
@@ -67,5 +68,14 @@ namespace Fukizi.Pfm.Services
       {
          return _revenueRepository.GetRevenuesForMonthAndYear(datetime.Month, datetime.Year);
       }
+
+      #region RevenueCalculations
+
+      public decimal GetTotalRevenueForMonth(DateTime datetime)
+      {
+         return LoadMonthRevenues(datetime).Sum(r => r.Amount);
+      }
+
+      #endregion
    }
 }
