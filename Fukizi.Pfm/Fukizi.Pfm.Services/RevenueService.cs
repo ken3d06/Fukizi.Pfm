@@ -44,6 +44,10 @@ namespace Fukizi.Pfm.Services
          _revenueRepository.SaveRevenue(revenue);
       }
 
+      public void DeleteRevenue(int id)
+      {
+         _revenueRepository.DeleteRevenue(id);
+      }
       public IEnumerable<Transaction> GetTransactions()
       {
          return  LoadRevenues() ;
