@@ -10,6 +10,11 @@ namespace Fukizi.Pfm.Model
        {
        }
 
+       public RevenueCategory() : base()
+       {
+
+       }
+
        public int CompareTo(RevenueCategory other)
        {
           return string.CompareOrdinal(Name, other.Name);

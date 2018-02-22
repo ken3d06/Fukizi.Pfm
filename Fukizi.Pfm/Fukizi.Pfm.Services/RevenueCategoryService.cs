@@ -49,12 +49,17 @@ namespace Fukizi.Pfm.Services
 
       public void Delete(string name)
       {
-         throw new NotImplementedException();
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(name));
+         _repository.RemoveByName(name);
       }
 
       public void Save(int id, string name)
       {
-         throw new NotImplementedException();
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(name));
+         ValidationContract.Required<ArgumentException>(!Exists(name), $"Revenue category '{name}' is already defined");
+
+         var revenueCategory = new RevenueCategory {Id = id, Name = name};
+         _repository.Save(revenueCategory);
       }
    }
 }

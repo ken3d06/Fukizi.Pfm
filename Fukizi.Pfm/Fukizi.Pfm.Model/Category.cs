@@ -6,6 +6,10 @@ namespace Fukizi.Pfm.Model
 {
    public class Category
    {
+      public Category()
+      {
+      }
+
       public Category(int id, string categoryName)
       {
          if (string.IsNullOrEmpty(categoryName))
