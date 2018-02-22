@@ -83,7 +83,7 @@ namespace Fukizi.Pfm.Services
             .Where(revenue => revenue.Category.Name.Equals(givenCategory, StringComparison.OrdinalIgnoreCase))
             .Sum(revenue => revenue.Amount);
       }
-      public Dictionary<string, decimal> GetRevenueTotalsForAllCategories(DateTime datetime)
+      public Dictionary<string, decimal> GetRevenueTotalsForAllCategoriesForMonth(DateTime datetime)
       {
          return LoadMonthRevenues(datetime)
             .GroupBy(i => i.Category.Name)
@@ -95,6 +95,12 @@ namespace Fukizi.Pfm.Services
          return LoadMonthRevenues(datetime)
             .Where(r => r.PayMethod.Name.Equals(payMethod, StringComparison.OrdinalIgnoreCase))
             .Sum(r => r.Amount);
+      }
+      public Dictionary<string, decimal>  GetRevenueTotalsForMonthForAllPayMethods(DateTime datetime)
+      {
+         return LoadMonthRevenues(datetime)
+            .GroupBy(r => r.PayMethod.Name)
+            .ToDictionary(g => g.Key, g => g.Sum(r => r.Amount));
       }
       #endregion
    }
