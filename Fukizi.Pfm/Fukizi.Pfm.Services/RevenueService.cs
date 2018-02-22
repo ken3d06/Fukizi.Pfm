@@ -18,21 +18,30 @@ namespace Fukizi.Pfm.Services
       }
       public void Create(Transaction transaction)
       {
-         var revenueTransaction = TransactionExtensions.TryParseToRevenue(transaction);
-         CreateNewRevenue(revenueTransaction);
+         var revenue = TransactionExtensions.TryParseToRevenue(transaction);
+         CreateNewRevenue(revenue);
       }
 
-      private void CreateNewRevenue(Revenue revenueTransaction)
+      private void CreateNewRevenue(Revenue revenue)
       {
-         ValidationContract.Required<ArgumentNullException>(revenueTransaction != null, "Revenue can never be null");
-         ValidationContract.Required<ArgumentException>(revenueTransaction != null && revenueTransaction.CategoryId > 0, "At least one Category must be selected");
-         ValidationContract.Required<ArgumentException>(revenueTransaction != null && revenueTransaction.PayMethodId > 0, "At least one payment method must be selected");
-         _revenueRepository.CreateRevenue(revenueTransaction);
+         ValidationContract.Required<ArgumentNullException>(revenue != null, "Revenue can never be null");
+         ValidationContract.Required<ArgumentException>(revenue != null && revenue.CategoryId > 0, "At least one Category must be selected");
+         ValidationContract.Required<ArgumentException>(revenue != null && revenue.PayMethodId > 0, "At least one payment method must be selected");
+         _revenueRepository.CreateRevenue(revenue);
       }
 
       public void Save(Transaction transaction)
       {
-         throw new NotImplementedException();
+         var revenue = TransactionExtensions.TryParseToRevenue(transaction) ;
+         SaveRevenue(revenue);
+      }
+
+      private void SaveRevenue(Revenue revenue)
+      {
+         ValidationContract.Required<ArgumentNullException>(revenue != null, "Revenue can never be null");
+         ValidationContract.Required<ArgumentException>(revenue != null && revenue.CategoryId > 0, "At least one Category must be selected");
+         ValidationContract.Required<ArgumentException>(revenue != null && revenue.PayMethodId > 0, "At least one payment method must be selected");
+         _revenueRepository.SaveRevenue(revenue);
       }
 
       public IEnumerable<Transaction> GetTransactions()
@@ -42,7 +51,7 @@ namespace Fukizi.Pfm.Services
 
       public Revenue LoadRevenue(int id)
       {
-         return _revenueRepository.GeRevenue(id);
+         return _revenueRepository.GetRevenue(id);
       }
 
       public IEnumerable<Revenue> LoadRevenues()
