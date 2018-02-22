@@ -46,7 +46,7 @@ namespace Fukizi.Pfm.Services
 
       public IEnumerable<Transaction> GetTransactions()
       {
-         throw new NotImplementedException();
+         return  LoadRevenues() ;
       }
 
       public Revenue LoadRevenue(int id)
