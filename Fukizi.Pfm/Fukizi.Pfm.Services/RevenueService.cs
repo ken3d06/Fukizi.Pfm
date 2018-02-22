@@ -89,6 +89,13 @@ namespace Fukizi.Pfm.Services
             .GroupBy(i => i.Category.Name)
             .ToDictionary(g => g.Key, g => g.Sum(i => i.Amount));
       }
+      public decimal GetRevenueTotalsForMonthByPayMethod(DateTime datetime, string payMethod)
+      {
+         ValidationContract.Required<ArgumentException>(!string.IsNullOrWhiteSpace(payMethod), "Pay method must not be null");
+         return LoadMonthRevenues(datetime)
+            .Where(r => r.PayMethod.Name.Equals(payMethod, StringComparison.OrdinalIgnoreCase))
+            .Sum(r => r.Amount);
+      }
       #endregion
    }
 }
