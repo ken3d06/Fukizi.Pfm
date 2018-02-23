@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Fukizi.Pfm.Common;
 using Fukizi.Pfm.Common.Validations;
 using Fukizi.Pfm.Model;
 using Fukizi.Pfm.Persistence;
@@ -83,8 +84,8 @@ namespace Fukizi.Pfm.Services
             {"Total Expenditures", GetTotalExpenditureForMonth(month)},
             {"Total Revenue", GetTotalRevenueForMonth(month)}
          };
-         //ToDo: add this range to dictionary
-         //categoryTotals.AddRange(_expenditureService.GetExpenditureTotalsForAllCategoriesForMonth(month));
+         
+         categoryTotals.AddRange(_expenditureService.GetExpenditureTotalsForAllCategoriesForMonth(month));
 
          foreach (var totalRevenueByCategory in _revenueService.GetRevenueTotalsForAllCategoriesForMonth(month))
          {
